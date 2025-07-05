@@ -2,16 +2,15 @@
 
 A full-stack stockbroker and financial analyst application built with LangGraph.js, featuring generative UI components and Human-in-the-Loop (HITL) functionality for stock transactions.
 
-# Interface 
-![image](https://github.com/user-attachments/assets/e1eaf050-1449-414b-a235-770106d92ace)
-
-#Langsmith working
-![image](https://github.com/user-attachments/assets/04324b49-4d13-4dd7-945d-18075f51d0d5)
-
-
 ## Overview
 
 This project demonstrates how to build an intelligent stockbroker agent using LangGraph.js. The application provides real-time stock information, portfolio management, and interactive stock purchasing capabilities with a modern, responsive UI.
+
+# Interface 
+![image](https://github.com/user-attachments/assets/e1eaf050-1449-414b-a235-770106d92ace)
+
+# Langsmith working
+![image](https://github.com/user-attachments/assets/04324b49-4d13-4dd7-945d-18075f51d0d5)
 
 ## Features
 
