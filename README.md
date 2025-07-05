@@ -1,77 +1,232 @@
-# Stockbroker Human in the Loop
+# Stockbroker - LangGraph.js Example
 
-The code for the Stockbroker Human in the Loop video can be found in this directory. It's setup as a monorepo-style project, with `frontend` and `backend` directories.
-The `frontend` directory contains a Next.js application which allows you to interact with the Stockbroker agent via a chat interface.
-The backend contains a LangGraph agent which powers the core functionality of the stockbroker.
+A full-stack stockbroker and financial analyst application built with LangGraph.js, featuring generative UI components and Human-in-the-Loop (HITL) functionality for stock transactions.
 
-## Deployment
+## Overview
 
-The stockbroker agent is publicly accessible through two interfaces:
+This project demonstrates how to build an intelligent stockbroker agent using LangGraph.js. The application provides real-time stock information, portfolio management, and interactive stock purchasing capabilities with a modern, responsive UI.
 
-1. API:
-> The Cloud API for the stockbroker agent is publicly accessible at the following base URL: `https://stockbrokeragent-bracesprouls-projects.vercel.app/api`
-> 
-> You can find the REST documentation for the stockbroker agent [here](https://stockbrokeragent-bracesprouls-projects.vercel.app/api/docs).
-> 
-> *Note* The rest documentation displays a "base URL" which is not exactly correct. To hit the API, you'll need to append `/api` to the end of the base URL listed.
+## Features
 
-2. Web-based Chat Interface:
-> To go along with the API, we've also deployed this web-based chat interface for the stockbroker agent.
->
-> You can access, and interact with it [here](https://stockbrokeragent-bracesprouls-projects.vercel.app).
+- **Real-time Stock Prices**: Query current stock prices by company name or ticker symbol
+- **Stock Purchasing**: Interactive UI for buying stocks with HITL approval
+- **Portfolio Management**: View and manage your stock portfolio
+- **Generative UI Components**: Dynamic UI elements generated based on user interactions
+- **Agent-based Architecture**: Built using LangGraph.js for orchestrating complex workflows
 
-## [YouTube Video](https://youtu.be/td7qNK8_H-0)
+## Prerequisites
 
-## Setup
+- Node.js 18+ 
+- npm or yarn
+- OpenAI API key
+- Google GenAI API key (optional but recommended)
+- Financial Datasets API key (for real stock data)
 
-To setup the stockbroker, install dependencies from the root of the monorepo:
+## Project Structure
 
-```bash
-yarn install
+```
+stockbroker/
+├── backend/
+│   ├── src/
+│   │   ├── index.ts        # Main backend entry point
+│   │   ├── agent.ts        # Stockbroker agent implementation
+│   │   └── tools/          # Agent tools for stock operations
+│   ├── package.json
+│   └── tsconfig.json
+├── frontend/
+│   ├── src/
+│   │   ├── App.tsx         # Main React application
+│   │   ├── components/     # UI components
+│   │   └── hooks/          # Custom React hooks
+│   ├── package.json
+│   └── vite.config.ts
+└── README.md
 ```
 
-This will install all dependencies required by both the frontend and backend projects. You can also run shared commands from the root of the project:
+## Installation
 
+1. Clone the repository:
 ```bash
-yarn format
-
-yarn build
+git clone https://github.com/bracesproul/langgraphjs-examples.git
+cd langgraphjs-examples/stockbroker
 ```
 
-## Environment variables
-
-### Backend
-
-The backend requires Financial Datasets AI, Tavily and OpenAI API keys to run. Sign up here:
-
-- Financial Datasets AI: https://financialdatasets.ai/
-- Tavily: https://tavily.com/
-- OpenAI: https://platform.openai.com/signup
-
-Once you have your API keys, create a `.env` file in the [`./backend`](`./backend`) directory and add the following:
-
+2. Install backend dependencies:
 ```bash
-FINANCIAL_DATASETS_API_KEY=YOUR_API_KEY
-TAVILY_API_KEY=YOUR_API_KEY
-OPENAI_API_KEY=YOUR_API_KEY
+cd backend
+npm install
 ```
 
-### Frontend
-
-The frontend requires the production, or local deployment of your agent, along with a LangSmith API key (if calling the production endpoint), and finally the name of the agent to interact with (in this case `stockbroker`).
-
-For local development, you can find the API endpoint in the bottom left of LangGraph Studio, which defaults to `http://localhost:51497`. You can find the production URL in the deployment page of your LangGraph cloud deployment.
-
-Then, set the variables in a `.env` file inside [`./frontend`](./frontend):
-
+3. Install frontend dependencies:
 ```bash
-# Only required for production deployments
-# LANGCHAIN_API_KEY=YOUR_API_KEY
-LANGGRAPH_API_URL=http://localhost:51497
-NEXT_PUBLIC_API_URL=http://localhost:3000/api # Or your production URL + /api
-NEXT_PUBLIC_LANGGRAPH_GRAPH_ID=stockbroker
+cd ../frontend
+npm install
 ```
 
-## LangGraph Config
+## Configuration
 
-The LangGraph configuration file for the stockbroker project is located inside [`./backend/langgraph.json`](./backend/langgraph.json). This file defines the stockbroker graph implemented in the project: `stockbroker`.
+1. Create a `.env` file in the backend directory:
+
+```env
+# Required
+OPENAI_API_KEY="your-openai-api-key"
+GOOGLE_API_KEY="your-google-api-key"
+
+# Required for stock data
+FINANCIAL_DATASETS_API_KEY="your-financial-datasets-api-key"
+
+# Optional - for tracing and observability
+LANGSMITH_PROJECT="stockbroker-agent"
+LANGSMITH_API_KEY="your-langsmith-api-key"
+LANGSMITH_TRACING_V2=true
+```
+
+2. Configure frontend environment variables (if needed):
+```env
+VITE_API_URL="http://localhost:3000"
+```
+
+## Running the Application
+
+### Development Mode
+
+1. Start the backend server:
+```bash
+cd backend
+npm run dev
+```
+
+2. In a new terminal, start the frontend:
+```bash
+cd frontend
+npm run dev
+```
+
+3. Open your browser and navigate to `http://localhost:5173`
+
+### Production Build
+
+1. Build the backend:
+```bash
+cd backend
+npm run build
+```
+
+2. Build the frontend:
+```bash
+cd frontend
+npm run build
+```
+
+3. Start the production server:
+```bash
+cd backend
+npm start
+```
+
+## Usage
+
+### Example Interactions
+
+1. **Check Stock Price**:
+   - "What's the current price of Apple?"
+   - "Show me TSLA stock price"
+
+2. **Buy Stocks**:
+   - "I want to buy 10 shares of Microsoft"
+   - "Purchase 5 shares of GOOGL"
+
+3. **View Portfolio**:
+   - "Show me my portfolio"
+   - "What stocks do I own?"
+
+### How It Works
+
+1. **User Input**: Users interact with the chat interface to make requests
+2. **Agent Processing**: The LangGraph.js agent processes the request and determines the appropriate action
+3. **Tool Execution**: Specific tools are called to fetch stock data or execute transactions
+4. **UI Generation**: Dynamic UI components are generated based on the action
+5. **Human Approval**: For stock purchases, users must approve the transaction (HITL)
+6. **Confirmation**: Transaction results are displayed with updated portfolio information
+
+## API Endpoints
+
+### Backend API
+
+- `POST /api/chat` - Main chat endpoint for agent interactions
+- `GET /api/portfolio` - Retrieve user portfolio
+- `POST /api/transaction` - Execute stock transactions
+- `GET /api/stock/:ticker` - Get stock information
+
+## Architecture
+
+The application uses a modern architecture with:
+
+- **Backend**: Node.js with TypeScript, Express.js, and LangGraph.js
+- **Frontend**: React with TypeScript and Vite
+- **State Management**: LangGraph.js for agent state orchestration
+- **AI Integration**: OpenAI for natural language processing
+- **Stock Data**: Financial Datasets API for real-time stock information
+
+## Development
+
+### Adding New Tools
+
+To add new tools to the stockbroker agent:
+
+1. Create a new tool file in `backend/src/tools/`
+2. Implement the tool interface
+3. Register the tool in the agent configuration
+4. Update the frontend to handle new UI components if needed
+
+### Testing
+
+Run tests with:
+```bash
+npm test
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **API Key Errors**: Ensure all required API keys are properly set in the `.env` file
+2. **Port Conflicts**: Make sure ports 3000 (backend) and 5173 (frontend) are available
+3. **Stock Data Issues**: Verify your Financial Datasets API key has proper permissions
+
+### Debug Mode
+
+Enable debug logging by setting:
+```env
+DEBUG=stockbroker:*
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is part of the LangGraph.js examples repository. See the main repository for license information.
+
+## Acknowledgments
+
+- Built with [LangGraph.js](https://github.com/langchain-ai/langgraphjs)
+- Part of the [LangGraph.js Examples](https://github.com/bracesproul/langgraphjs-examples) collection
+- Inspired by modern fintech applications
+
+## Resources
+
+- [LangGraph.js Documentation](https://langchain-ai.github.io/langgraphjs/)
+- [LangChain Documentation](https://js.langchain.com/)
+- [Financial Datasets API](https://financialdatasets.ai/)
+
+## Support
+
+For issues and questions:
+- Open an issue in the [GitHub repository](https://github.com/bracesproul/langgraphjs-examples/issues)
+- Check the [LangGraph.js community](https://github.com/langchain-ai/langgraphjs/discussions)
