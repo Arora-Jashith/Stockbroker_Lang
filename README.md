@@ -1,4 +1,4 @@
-# Stockbroker - LangGraph.js Example
+# Stockbroker - Using LangChain and LangGraph
 
 A full-stack stockbroker and financial analyst application built with LangGraph.js, featuring generative UI components and Human-in-the-Loop (HITL) functionality for stock transactions.
 
