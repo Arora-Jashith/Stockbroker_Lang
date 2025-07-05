@@ -1,0 +1,24 @@
+yarn run v1.22.22
+$ prettier --config .prettierrc --write "src"
+src/app/api/[..._path]/route.ts 85ms
+src/app/globals.css 32ms
+src/app/layout.tsx 9ms
+src/app/page.tsx 3ms
+src/components/Alert.tsx 16ms
+src/components/APIDocsAlert.tsx 26ms
+src/components/ChatInterface.tsx 37ms
+src/components/HomeComponent.tsx 8ms
+src/components/InputArea.tsx 10ms
+src/components/Interrupted.tsx 20ms
+src/components/Message.tsx 12ms
+src/components/MessageList.tsx 4ms
+src/components/Settings.tsx 23ms
+src/components/SkeletonMessage.tsx 5ms
+src/components/ToolCall.tsx 42ms
+src/constants.ts 4ms
+src/types.ts 4ms
+src/utils/chatApi.ts 17ms
+src/utils/cookies.ts 4ms
+src/utils/shadcnUtils.ts 3ms
+src/utils/streamHandler.ts 28ms
+Done in 0.83s.
