@@ -6,8 +6,6 @@ A full-stack stockbroker and financial analyst application built with LangGraph.
 
 This project demonstrates how to build an intelligent stockbroker agent using LangGraph.js. The application provides real-time stock information, portfolio management, and interactive stock purchasing capabilities with a modern, responsive UI.
 
-![image](https://github.com/user-attachments/assets/e1eaf050-1449-414b-a235-770106d92ace)
-
 ## Features
 
 - **Real-time Stock Prices**: Query current stock prices by company name or ticker symbol
@@ -20,6 +18,9 @@ This project demonstrates how to build an intelligent stockbroker agent using La
 
 ![image](https://github.com/user-attachments/assets/4b837fb7-f9f5-4fd1-878a-3707ee8df41e)
 
+## Stockbroker Agent Interface
+
+![image](https://github.com/user-attachments/assets/d7798319-f921-469f-8987-fd6a2eb28691)
 
 ## Prerequisites
 
